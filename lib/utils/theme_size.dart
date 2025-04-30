@@ -26,6 +26,10 @@ class ThemeSize {
   static const double themeHeadingFontSize = 16;
   static const double themeFontSize = 12;
 
+  static const double dialogTitleFontSize = 16;
+  static const double dialogSubTitleFontSize = 14;
+  static const double dialogDescriptionFontSize = 12;
+
   static const double themeElevation = 2;
 
   static const String imagetype = "Adapt To Image";

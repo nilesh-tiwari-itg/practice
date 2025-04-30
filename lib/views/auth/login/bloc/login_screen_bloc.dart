@@ -28,29 +28,40 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
       emit(LoginScreenSubmittingState());
     }
 
-    var formData = {"email": eventData.email, "password": eventData.password};
+    try {
+      var formData = {"email": eventData.email, "password": eventData.password};
+      ApiResponse apiResponse =
+          await ApiRepository.postAPI(ApiConst.login, formData);
 
-    ApiResponse apiResponse =
-        await ApiRepository.postAPI(ApiConst.login, formData);
+      debugPrint("-----login Bloc-------${apiResponse.toJson()}");
+      if (apiResponse.status) {
+        UserModel user = UserModel.fromJson(apiResponse.data["user"]);
+        String accessToken = apiResponse.data["token"];
 
-    if (apiResponse.status) {
-      UserModel user = UserModel.fromJson(apiResponse.data["result"]["user"]);
-      String accessToken = apiResponse.data["result"]["accessToken"];
+        globals.isLogin = true;
+        Session().setIsLogin(true);
+        Session().setUser(user);
+        Session().setToken(accessToken);
 
-      globals.isLogin = true;
-      Session().setIsLogin(true);
-      Session().setUser(user);
-      Session().setToken(accessToken);
+        debugPrint("-----login Bloc Success-------");
 
-      debugPrint("-----login Bloc Success-------");
-
-      if (!isBlocClosed) {
-        emit(LoginScreenSuccessState());
+        if (!isBlocClosed) {
+          emit(LoginScreenSuccessState());
+        }
+      } else {
+        debugPrint("-----login Bloc Failure------${apiResponse.message}-");
+        if (!isBlocClosed) {
+          emit(LoginScreenFailureState(apiResponse.message));
+        }
       }
-    } else {
-      debugPrint("-----login Bloc Failure-------");
+    } catch (e) {
+      debugPrint("-----login Bloc Error------${e.toString()}-");
       if (!isBlocClosed) {
-        emit(LoginScreenFailureState(apiResponse.message));
+        emit(LoginScreenFailureState("Something went wrong"));
+      }
+    } finally {
+      if (!isBlocClosed) {
+        emit(LoginScreenInitialState());
       }
     }
   }

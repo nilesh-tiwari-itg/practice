@@ -508,11 +508,11 @@ class _SimpleTextFormFieldWithPrefixIconAndVisibilityToggleState
                 ? Container(
                     padding: EdgeInsets.all(10),
                     width: MediaQuery.of(context).size.width * 0.058,
-                    child: SvgPicture.asset("assets/images/closed_eye.svg"))
+                    child: SvgPicture.asset("assets/svg/eye_slash.svg"))
                 : Container(
                     padding: EdgeInsets.all(10),
                     width: MediaQuery.of(context).size.width * 0.058,
-                    child: SvgPicture.asset("assets/images/open_eye.svg")),
+                    child: SvgPicture.asset("assets/svg/eye.svg")),
             onTap: () {
               setState(() {
                 _isObscured = !_isObscured;
