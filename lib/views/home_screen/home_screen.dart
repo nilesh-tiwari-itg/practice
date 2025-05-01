@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_backend/views/clear_db/clear_db_screen.dart';
 import 'package:practice_backend/views/signup_request/signup_request_screen.dart';
+import 'package:practice_backend/views/widgets/custom_button.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,12 +14,6 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   HomeScreenState();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _load();
-  // }
-
   @override
   void dispose() {
     super.dispose();
@@ -28,41 +23,39 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text("welcome"),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SignupRequestScreen()));
-            },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text("SignUp Requests"),
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Welcome",
+              textAlign: TextAlign.start,
+              style: TextStyle(color: Colors.black, fontSize: 26),
             ),
-          ),
-          
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ClearDbScreen()));
-            },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text("Clear DB Chat "),
+            SizedBox(
+              height: 20,
             ),
-          )
-        ],
+            CustomButton(
+              text: "Signup Requests",
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SignupRequestScreen()));
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CustomButton(
+              text: "Clear DB Chat",
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ClearDbScreen()));
+              },
+            ),
+          ],
+        ),
       )),
     );
   }

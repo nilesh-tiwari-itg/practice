@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:practice_backend/chat/chat_screen.dart';
+import 'package:practice_backend/session/session.dart';
 import 'package:practice_backend/views/auth/login/login_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Session().setSharePreferences();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -29,8 +29,9 @@ class ApiRepository {
           return ApiResponse(
               status: true,
               statusCode: "200",
-              message: "Success",
-              data: response.data);
+              message: response.data["message"], //"Success",
+              data: response.data["result"]);
+              // data: response.data);
         } else if (response.statusCode == 503) {
           debugPrint("----------------------------------api repository 503 ");
           return ApiResponse(
@@ -72,8 +73,9 @@ class ApiRepository {
           return ApiResponse(
               status: true,
               statusCode: "200",
-              message: "Success",
-              data: response.data);
+              message: response.data["message"], //"Success",
+              data: response.data["result"]);
+              // data: response.data);
         } else if (response.statusCode == 503) {
           debugPrint("----------------------------------api repository 503 ");
           return ApiResponse(
@@ -123,7 +125,7 @@ class ApiRepository {
           return ApiResponse(
               status: true,
               statusCode: "200",
-              message: "Success",
+              message: response.data["message"], //"Success",
               data: response.data["result"]);
               // data: response.data);
         } else if (response.statusCode == 503) {
@@ -175,8 +177,9 @@ class ApiRepository {
           return ApiResponse(
               status: true,
               statusCode: "200",
-              message: "Success",
-              data: response.data);
+              message: response.data["message"], //"Success",
+              data: response.data["result"]);
+              // data: response.data);
         } else if (response.statusCode == 503) {
           debugPrint("----------------------------------api repository 503 ");
           return ApiResponse(

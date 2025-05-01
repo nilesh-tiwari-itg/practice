@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice_backend/session/session.dart';
 import 'package:practice_backend/utils/dialogs.dart';
 import 'package:practice_backend/utils/validations.dart';
 import 'package:practice_backend/views/auth/login/bloc/login_screen_bloc.dart';
@@ -13,18 +14,38 @@ import '../../widgets/custom_textfield.dart';
 import '../../widgets/gap_widget.dart';
 import '../../widgets/link_button.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    String defaultFontFamily = 'Roboto-Light.ttf';
-    double defaultFontSize = 14;
-    double defaultIconSize = 17;
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final goBack = false;
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  String defaultFontFamily = 'Roboto-Light.ttf';
+  double defaultFontSize = 14;
+  double defaultIconSize = 17;
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final goBack = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIsLogin();
+  }
+
+  Future<void> checkIsLogin() async {
+    bool isLogin = await Session().isLogin();
+    debugPrint("iislogn--$isLogin");
+    if (isLogin) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginScreenBloc(),
       child: BlocListener<LoginScreenBloc, LoginScreenState>(

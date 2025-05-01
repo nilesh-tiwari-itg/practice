@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_backend/repository/api_const.dart';
 import 'package:practice_backend/repository/api_repository.dart';
 import 'package:practice_backend/repository/api_response.dart';
+import 'package:practice_backend/session/session.dart';
 import 'package:practice_backend/views/clear_db/bloc/clear_db_screen_event.dart';
 import 'package:practice_backend/views/clear_db/bloc/clear_db_screen_state.dart';
 
-class ClearDbScreenBloc
-    extends Bloc<ClearDbScreenEvent, ClearDbScreenState> {
-  ClearDbScreenBloc() : super(ClearDbScreenInitialState()) {}
+class ClearDbScreenBloc extends Bloc<ClearDbScreenEvent, ClearDbScreenState> {
+  ClearDbScreenBloc() : super(ClearDbScreenInitialState()) {
+    on<OnClearDbCompleteChatHistoryEvent>((event, emit) {
+      clearDbCompleteChatHistory();
+    });
+  }
 
   bool isBlocClosed = false;
   @override
@@ -17,14 +21,17 @@ class ClearDbScreenBloc
     return super.close();
   }
 
-  clearDbChatHistory() async {
+  clearDbCompleteChatHistory() async {
     if (!isBlocClosed) {
       emit(ClearDbScreenLoadingState());
     }
 
+    var token = await Session().getToken();
+
     try {
-      ApiResponse apiResponse =
-          await ApiRepository.getApi(ApiConst.signupRequest);
+      ApiResponse apiResponse = await ApiRepository.deleteAPI(
+          ApiConst.clearCompleteChatHistory,
+          token: "Bearer $token");
 
       debugPrint("-----clearDbChatHistory Bloc-------${apiResponse.toJson()}");
 
@@ -32,7 +39,7 @@ class ClearDbScreenBloc
         debugPrint("-----clearDbChatHistory Bloc Success-------");
 
         if (!isBlocClosed) {
-          emit(ClearDbScreenSuccessState());
+          emit(ClearDbScreenSuccessState(apiResponse.message));
         }
       } else {
         debugPrint(

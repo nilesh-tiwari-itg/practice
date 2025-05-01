@@ -6,7 +6,10 @@ class ClearDbScreenSubmittingState extends ClearDbScreenState {}
 
 class ClearDbScreenLoadingState extends ClearDbScreenState {}
 
-class ClearDbScreenSuccessState extends ClearDbScreenState {}
+class ClearDbScreenSuccessState extends ClearDbScreenState {
+  String message;
+  ClearDbScreenSuccessState(this.message);
+}
 
 class ClearDbScreenFailureState extends ClearDbScreenState {
   String message;

@@ -14,8 +14,8 @@ class CustomListTile extends StatelessWidget {
       {super.key,
       required this.text,
       this.onPressed,
-      this.leadingIcon,
-      this.trailingIcon,
+      required this.leadingIcon,
+      required this.trailingIcon,
       this.borderShape});
 
   @override
