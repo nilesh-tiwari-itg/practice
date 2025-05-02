@@ -1,14 +1,35 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice_backend/models/signup_requests_model.dart';
 import 'package:practice_backend/repository/api_const.dart';
 import 'package:practice_backend/repository/api_repository.dart';
 import 'package:practice_backend/repository/api_response.dart';
+import 'package:practice_backend/session/session.dart';
 import 'package:practice_backend/views/signup_request/bloc/signup_request_screen_event.dart';
 import 'package:practice_backend/views/signup_request/bloc/signup_request_screen_state.dart';
 
 class SignupRequestScreenBloc
     extends Bloc<SignupRequestScreenEvent, SignupRequestScreenState> {
-  SignupRequestScreenBloc() : super(SignupRequestScreenInitialState()) {}
+  SignupRequestScreenBloc() : super(SignupRequestScreenInitialState()) {
+    loadSignUpRequests();
+
+    on<SignupRequestScreenEvent>((event, emit) {
+      // if (event is SignupRequestScreenLoadEvent) {
+      //   currentPage = event.currentPage;
+      //   limit = event.limit;
+      //   searchQuery = event.searchQuery;
+      //   loadSignUpRequests();
+      // } else
+      if (event is SignupRequestScreenSearchEvent) {
+        searchQuery = event.searchQuery;
+        currentPage = 1;
+        loadSignUpRequests();
+      } else if (event is SignupRequestScreenPageChangeEvent) {
+        currentPage = event.currentPage;
+        loadSignUpRequests();
+      }
+    });
+  }
 
   bool isBlocClosed = false;
   @override
@@ -17,22 +38,35 @@ class SignupRequestScreenBloc
     return super.close();
   }
 
+  int totalPages = 1;
+  int currentPage = 1;
+  int limit = 5;
+  String searchQuery = "";
+
   loadSignUpRequests() async {
     if (!isBlocClosed) {
       emit(SignupRequestScreenLoadingState());
     }
 
-    try {
-      ApiResponse apiResponse =
-          await ApiRepository.getApi(ApiConst.signupRequest);
+    var token = await Session().getToken();
+    var formData = {"query": searchQuery, "page": currentPage, "limit": limit};
 
-      debugPrint("-----loadSignUpRequest Bloc-------${apiResponse.toJson()}");
+    try {
+      ApiResponse apiResponse = await ApiRepository.postAPI(
+          ApiConst.signupRequest, formData,
+          token: "Bearer $token");
+
+      // debugPrint("-----loadSignUpRequest Bloc-------${apiResponse.toJson()}");
 
       if (apiResponse.status) {
-        debugPrint("-----loadSignUpRequest Bloc Success-------");
+        SignupRequestsModel signupRequestsModel =
+            SignupRequestsModel.fromJson(apiResponse.data);
+
+        debugPrint(
+            "-loadSignUpRequest Bloc Success--signupRequestsModel ${signupRequestsModel.toJson()}");
 
         if (!isBlocClosed) {
-          emit(SignupRequestScreenSuccessState());
+          emit(SignupRequestScreenSuccessState(signupRequestsModel));
         }
       } else {
         debugPrint(
@@ -46,10 +80,10 @@ class SignupRequestScreenBloc
       if (!isBlocClosed) {
         emit(SignupRequestScreenFailureState("Something went wrong"));
       }
-    } finally {
-      if (!isBlocClosed) {
-        emit(SignupRequestScreenInitialState());
-      }
+      // } finally {
+      //   if (!isBlocClosed) {
+      //     emit(SignupRequestScreenInitialState());
+      //   }
     }
   }
 }
