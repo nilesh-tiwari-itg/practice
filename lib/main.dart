@@ -6,6 +6,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Session().setSharePreferences();
   runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
