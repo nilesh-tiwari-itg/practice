@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="primary">#6200EE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="searchBackground">#D9C9C9</color>
+    <color name="searchText">#000000</color>
+    <color name="textPrimary">#000000</color>
+</resources>

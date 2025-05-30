@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Area of Triangle",
+    "expression": "Area = (1/2) × base × height"
+  },
+  {
+    "title": "Area of Circle",
+    "expression": "Area = π × r²"
+  },
+  {
+    "title": "Perimeter of Rectangle",
+    "expression": "Perimeter = 2 × (length + width)"
+  },
+  {
+    "title": "Pythagoras Theorem",
+    "expression": "a² + b² = c²"
+  }
+]
