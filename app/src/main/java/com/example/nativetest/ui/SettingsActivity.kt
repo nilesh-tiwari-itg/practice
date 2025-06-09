@@ -13,6 +13,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.widget.CompoundButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.nativetest.databinding.ActivitySettingsBinding
 import com.example.nativetest.util.ReminderReceiver
