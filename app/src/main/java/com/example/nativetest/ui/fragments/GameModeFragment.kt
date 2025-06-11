@@ -22,6 +22,7 @@ class GameModeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.quizButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.contentFrame, QuizFragment())
                 .addToBackStack(null)
                 .commit()
@@ -29,6 +30,7 @@ class GameModeFragment : Fragment() {
 
         binding.puzzleButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.contentFrame, PuzzleFragment())
                 .addToBackStack(null)
                 .commit()

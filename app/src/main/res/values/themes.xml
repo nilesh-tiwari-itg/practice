@@ -5,6 +5,13 @@
         <item name="android:textColorPrimary">@color/textPrimary</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+
     <style name="QuizOptionStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

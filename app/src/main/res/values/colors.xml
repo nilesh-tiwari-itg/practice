@@ -9,4 +9,11 @@
     <color name="textPrimary">#000000</color>
     <color name="error">#ff0000</color>
     <color name="chip_background">#c1c1c1</color>
+
+    <color name="colorPrimary">#2D5DA1</color>
+    <color name="colorSecondary">#FFC107</color>
+    <color name="background">#FFFFFF</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="chip_background">#E0F7FA</color>
 </resources>

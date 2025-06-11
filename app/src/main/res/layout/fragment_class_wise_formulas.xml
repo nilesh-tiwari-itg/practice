@@ -5,13 +5,14 @@
     android:orientation="vertical"
     android:padding="16dp">
     <EditText
+        android:padding="12dp"
+        android:background="@drawable/search_input_bg"
+        android:textSize="16sp"
+        android:hint="Search any formula..."
         android:id="@+id/globalSearchInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search any formula..."
         android:drawableStart="@drawable/ic_search"
-        android:padding="12dp"
-        android:background="@drawable/search_input_bg"
         android:layout_marginBottom="12dp" />
 
     <HorizontalScrollView

@@ -1,7 +1,9 @@
 package com.example.nativetest
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Dismiss keyboard when scrolling RecyclerView or tapping background:
+        binding.root.setOnTouchListener { _, _ ->
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+            false
+        }
 
         // Load default fragment
         loadFragment(ClassWiseFormulasFragment())
@@ -54,7 +62,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
             .replace(R.id.contentFrame, fragment)
+//            .addToBackStack(null)
             .commit()
     }
 }
