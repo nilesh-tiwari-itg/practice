@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nativetest.R
-//import androidx.fragment.app.viewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nativetest.SubjectAdapter
 import com.example.nativetest.databinding.FragmentClassWiseFormulasBinding
@@ -38,7 +38,8 @@ class ClassWiseFormulasFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = SubjectAdapter { subject ->
-            val intent = android.content.Intent(requireContext(), SubjectFormulasActivity::class.java)
+            val intent =
+                android.content.Intent(requireContext(), SubjectFormulasActivity::class.java)
             intent.putExtra("subject_name", subject.name)
             intent.putExtra("class_number", viewModel.selectedClass.value ?: 0)
             startActivity(intent)
@@ -51,7 +52,8 @@ class ClassWiseFormulasFragment : Fragment() {
         val classes = listOf("Class 8", "Class 9", "Class 10", "Class 11", "Class 12")
         binding.classTabLayout.removeAllViews()
         classes.forEachIndexed { index, className ->
-            val button = layoutInflater.inflate(R.layout.item_class_tab, binding.classTabLayout, false)
+            val button =
+                layoutInflater.inflate(R.layout.item_class_tab, binding.classTabLayout, false)
             val textView = button.findViewById<android.widget.TextView>(R.id.classTabText)
             textView.text = className
             textView.scaleX = if (index == selectedIndex) 1.1f else 1f
@@ -66,6 +68,7 @@ class ClassWiseFormulasFragment : Fragment() {
                     if (index == selectedIndex) R.color.white else R.color.textPrimary
                 )
             )
+            viewModel.selectClass(8)
             textView.setOnClickListener {
                 selectedIndex = index
                 viewModel.selectClass(index + 8)

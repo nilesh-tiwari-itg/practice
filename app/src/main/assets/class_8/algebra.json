@@ -1,7 +1,8 @@
 [
   {
     "title": "Quadratic Formula",
-    "expression": "x = (-b ± √(b²-4ac)) / 2a"
+    "expression": "x = (-b ± √(b²-4ac)) / 2a",
+    "description": "Used to find area of a circle given its radius."
   },
   {
     "title": "Binomial Expansion",

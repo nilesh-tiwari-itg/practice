@@ -1,11 +1,13 @@
 [
   {
     "title": "Area of Triangle",
-    "expression": "Area = (1/2) × base × height"
+    "expression": "Area = ½ × base × height",
+    "tags": ["Basic", "Exam"]
   },
   {
     "title": "Area of Circle",
-    "expression": "Area = π × r²"
+    "expression": "Area = π × r²",
+    "description": "Used to find area of a circle given its radius."
   },
   {
     "title": "Perimeter of Rectangle",
@@ -13,6 +15,7 @@
   },
   {
     "title": "Pythagoras Theorem",
-    "expression": "a² + b² = c²"
+    "expression": "a² + b² = c²",
+    "tags": ["Trick"]
   }
 ]

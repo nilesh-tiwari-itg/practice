@@ -7,4 +7,6 @@
     <color name="searchBackground">#D9C9C9</color>
     <color name="searchText">#000000</color>
     <color name="textPrimary">#000000</color>
+    <color name="error">#ff0000</color>
+    <color name="chip_background">#c1c1c1</color>
 </resources>

@@ -6,10 +6,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.nativetest.R
 import com.example.nativetest.databinding.ActivityMainBinding
 import com.example.nativetest.ui.ClassWiseFormulasActivity
+import com.example.nativetest.ui.ClassWiseFormulasFragment
 import com.example.nativetest.ui.SettingsActivity
+import com.example.nativetest.ui.SettingsFragment
+import com.example.nativetest.ui.ToolSelectionFragment
+import com.example.nativetest.ui.fragments.FavoritesFragment
+import com.example.nativetest.ui.fragments.GameModeFragment
+import com.example.nativetest.ui.fragments.QuizFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_home -> ClassWiseFormulasFragment()
                 R.id.menu_tools -> ToolSelectionFragment()
                 R.id.menu_settings -> SettingsFragment()
+                R.id.menu_favorites -> FavoritesFragment()
+                R.id.menu_game_mode -> GameModeFragment()
                 else -> ClassWiseFormulasFragment()
             }
             loadFragment(fragment)
